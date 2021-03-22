@@ -14,8 +14,8 @@ menuOptions = """
 
 if __name__ == '__main__':
     print(greeting)
-    path = input('\nУказанный путь:')
     try:
+        path = input('\nУказанный путь:')
         samples = CSV.read_to_end(path)
         options = {
             '1': "\n".join(x for x in CSV.write_all_department(samples)),
@@ -38,4 +38,4 @@ if __name__ == '__main__':
                     sys.exit()
             print(options[option])
     except Exception as e:
-        print(e)
+        logging.error(e)

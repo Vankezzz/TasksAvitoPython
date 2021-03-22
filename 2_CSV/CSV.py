@@ -78,7 +78,7 @@ def write_report_by_department(data_csv: List[SampleCSV]) -> List[DepartmentRepo
         if sample.departmentHierarchy in departments:
             departments_salary.get(sample.departmentHierarchy).append(sample.salary)
     for i in departments:
-        salary_list = departments_salary.get(sample.departmentHierarchy)
+        salary_list = departments_salary.get(i)
         salary_list.sort()
         report.append(DepartmentReport(department=i,
                                        number=salary_list.__len__(),
