@@ -52,7 +52,7 @@ def save_report_by_department(data_csv: List[SampleCSV], name: str):
     report_str = "\n".join(
         ";".join((x.department, str(x.number), str(x.minSalary), str(x.maxSalary), str(x.averageSalary))) for x in
         report)
-    f = open(name+".csv", 'w')
+    f = open(name + ".csv", 'w')
     f.write(report_str)
     f.close()
 
