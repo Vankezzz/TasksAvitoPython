@@ -34,10 +34,3 @@ def what_is_year_now() -> int:
 
     return int(year_str)
 
-
-if __name__ == '__main__':
-    year = what_is_year_now()
-    exp_year = 2019
-
-    print(year)
-    assert year == exp_year
