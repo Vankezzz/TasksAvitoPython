@@ -15,7 +15,7 @@ def test_first_format(urlopen):
                              '"currentFileTime":132608491427816346,' \
                              '"ordinalDate":"2021-81",' \
                              '"serviceResponse":null}'
-    mock.__enter__.return_value = mock
+    mock.__enter__.return_value = mock  # __enter__ - контекестный менеджер (вместо псевдонима resp) mock вместо resp
     urlopen.return_value = mock
 
     year = what_is_year_now.what_is_year_now()

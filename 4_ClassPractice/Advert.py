@@ -2,6 +2,11 @@ import json
 import keyword
 
 
+class Base:
+    def __str__(self):
+        return f'{self.title} | {self.price} ₽'
+
+
 class ColorizeMixin:
     """
     Print title and price attribute
@@ -10,17 +15,18 @@ class ColorizeMixin:
     31 = foreground of text
     42 м = background of text
     """
-    foreground_code = 31
-    background_code = 42
-    style_code = 3
 
-    def __repr__(self):
-        return f'\033[{self.style_code};{self.foreground_code};{self.background_code}m ' \
-               f'{self.title} | {self.price} ₽' \
-               f'\033[0;1;1m'
+    def __init__(self):
+        self.foreground_code = 31
+        self.background_code = 42
+        self.style_code = 3
+
+    def __str__(self):
+        y = super().__str__()
+        return f'\033[{self.style_code};{self.foreground_code};{self.background_code}m ' + y + f'\033[0;1;1m'
 
 
-class Advert(ColorizeMixin):
+class Advert(ColorizeMixin, Base):
     """
     Contains advert info
     """
@@ -52,11 +58,11 @@ def get_obj_from_json(data: dict, cls: object) -> object:
     obj = cls()
     for a, b in data.items():
         if isinstance(b, (list, tuple)):
-            obj.__setattr__(a, [get_obj_from_json(x, cls)
-                                if isinstance(x, dict)
-                                else x for x in b])
+            setattr(obj, a, [get_obj_from_json(x, cls)
+                             if isinstance(x, dict)
+                             else x for x in b])
         else:
-            obj.__setattr__(a, get_obj_from_json(b, cls)
+            setattr(obj, a, get_obj_from_json(b, cls)
             if isinstance(b, dict) else b)
     return obj
 

@@ -81,7 +81,7 @@ def write_report_by_department(data_csv: List[SampleCSV]) -> List[DepartmentRepo
         salary_list = departments_salary.get(i)
         salary_list.sort()
         report.append(DepartmentReport(department=i,
-                                       number=salary_list.__len__(),
+                                       number=len(salary_list),
                                        minSalary=salary_list[0],
                                        maxSalary=salary_list[-1],
                                        averageSalary=sum(salary_list) // len(salary_list)))
